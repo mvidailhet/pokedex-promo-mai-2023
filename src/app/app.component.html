@@ -1,4 +1,15 @@
-<h1>{{ title }} app is running!</h1>
+<div class="container-fluid mt-5">
+  <h1 class="mb-3">{{ title }} app is running!</h1>
 
-<input type="text" [(ngModel)]="title" />
+  <div class="row">
+    <div class="col">
+      <input class="form-control" type="text" [(ngModel)]="title" />
+    </div>
+    <div class="col-3">
+      <button class="btn btn-primary">test</button>
+    </div>
+  </div>
+</div>
+
+
 
