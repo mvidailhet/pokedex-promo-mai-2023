@@ -13,16 +13,14 @@ export class PokemonListComponent {
   isButtonDisabled = false;
 
   constructor() {
-    this.toggleButtonDisabled();
   }
 
   toggleButtonDisabled() {
-    setTimeout(() => {
+    this.isButtonDisabled = !this.isButtonDisabled;
+  }
 
-      this.isButtonDisabled = !this.isButtonDisabled;
-
-      this.toggleButtonDisabled();
-    }, 3000);
+  onDisableBtnCLick() {
+    this.toggleButtonDisabled();
   }
 
 }
