@@ -9,4 +9,20 @@ import { Component } from '@angular/core';
 })
 export class PokemonListComponent {
   title = 'toto';
+
+  isButtonDisabled = false;
+
+  constructor() {
+    this.toggleButtonDisabled();
+  }
+
+  toggleButtonDisabled() {
+    setTimeout(() => {
+
+      this.isButtonDisabled = !this.isButtonDisabled;
+
+      this.toggleButtonDisabled();
+    }, 3000);
+  }
+
 }
