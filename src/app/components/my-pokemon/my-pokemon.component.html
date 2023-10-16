@@ -1,4 +1,4 @@
-<div class="text-bg-primary text-light p-3 my-3">
-  {{ name }} - {{ type }} -
+<div class="text-light p-3 my-3" style="background-color: {{ type.color }}">
+  {{ name }} - {{ type.name }} - {{ type.color }}
   <button (click)="changeName()" [disabled]="isButtonDisabled" class="btn btn-secondary">Changer</button>
 </div>

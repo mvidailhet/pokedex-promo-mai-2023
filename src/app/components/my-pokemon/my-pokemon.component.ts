@@ -1,12 +1,35 @@
 import { Component } from '@angular/core';
 
+interface Type {
+  name: string;
+  color: string;
+}
+
 @Component({
   selector: 'app-my-pokemon',
   templateUrl: './my-pokemon.component.html',
-  styleUrls: ['./my-pokemon.component.scss']
+  styleUrls: ['./my-pokemon.component.scss'],
 })
 export class MyPokemonComponent {
-  types = ['eau', 'feu', 'plante'];
+  types: Type[] = [
+    {
+      name: 'plante',
+      color: 'green',
+    },
+    {
+      name: 'feu',
+      color: 'red',
+    },
+    {
+      name: 'eau',
+      color: 'blue',
+    },
+    {
+      name: 'insecte',
+      color: 'brown',
+    }
+  ];
+
   names = ['carapuce', 'dracaufeu', 'bulbizarre'];
 
   name = 'bulbizarre';
@@ -14,9 +37,8 @@ export class MyPokemonComponent {
 
   isButtonDisabled = false;
 
-  getRandomNumber(min: number, max: number)
-  {
-   return Math.floor(Math.random() * (max - min + 1)) + min;
+  getRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   changeName() {
