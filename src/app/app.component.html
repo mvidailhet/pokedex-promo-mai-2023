@@ -1,10 +1,13 @@
 <div class="container-fluid mt-5">
-
   <h2>coucou</h2>
 
-  <app-pokemon-list></app-pokemon-list>
+  <!--  <app-pokemon-list></app-pokemon-list> -->
 
+  <div
+    *ngFor="let type of types; let myIndex = index"
+    style="background-color: {{ type.color }}"
+    class="text-light p-3 my-3"
+  >
+    {{ myIndex }} - {{ type.name }}
+  </div>
 </div>
-
-
-
