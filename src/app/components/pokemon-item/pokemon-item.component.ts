@@ -3,7 +3,8 @@ import { Utils } from "src/app/utils";
 
 @Component({
   selector: 'app-pokemon-item',
-  templateUrl: './pokemon-item.component.html'
+  templateUrl: './pokemon-item.component.html',
+  styleUrls: ['./pokemon-item.component.scss']
 })
 export class PokemonItemComponent {
   name = 'Pikachu';

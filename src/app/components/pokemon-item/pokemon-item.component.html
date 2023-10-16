@@ -1,8 +1,8 @@
 <div
   class="text-center p-3 my-3"
-  [ngStyle]="{
-    'background-color': gender === 'male' ? 'blue' : 'pink',
-    color: gender === 'male' ? 'white' : 'black'
+  [ngClass]="{
+    'pokemon-male': gender === 'male',
+    'pokemon-female': gender === 'female'
   }"
 >
   {{ name }} - {{ level }} - {{ gender }}
