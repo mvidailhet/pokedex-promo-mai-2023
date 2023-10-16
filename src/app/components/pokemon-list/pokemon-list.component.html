@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<button (click)="this.onDisableBtnCLick()" class="btn btn-danger">toggle button disable</button>
+<div class="my-4">
+  <input class="form-control" [(ngModel)]="title" type="text" />
+</div>
+
+<button (click)="this.onDisableBtnCLick()" class="btn btn-danger my-4">toggle button disable</button>
 
 <app-pokemon-item></app-pokemon-item>
 <app-pokemon-item></app-pokemon-item>

@@ -12,9 +12,6 @@ export class PokemonListComponent {
 
   isButtonDisabled = false;
 
-  constructor() {
-  }
-
   toggleButtonDisabled() {
     this.isButtonDisabled = !this.isButtonDisabled;
   }
@@ -24,13 +21,9 @@ export class PokemonListComponent {
   }
 
   onInputChange(event: Event) {
-    //console.log(event);
     const inputElt = event.target as HTMLInputElement;
     console.log(inputElt.value);
-
     this.title = inputElt.value;
-    //console.log(event.target.value);
-
   }
 
 }
