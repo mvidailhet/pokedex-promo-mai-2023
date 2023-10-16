@@ -1,6 +1,9 @@
 <div
-  class="text-center text-light p-3 my-3"
-  [ngStyle]="{ 'background-color': gender === 'male' ? 'blue' : 'purple' }"
+  class="text-center p-3 my-3"
+  [ngStyle]="{
+    'background-color': gender === 'male' ? 'blue' : 'pink',
+    color: gender === 'male' ? 'white' : 'black'
+  }"
 >
   {{ name }} - {{ level }} - {{ gender }}
 </div>
