@@ -5,6 +5,10 @@ import { Component } from "@angular/core";
   templateUrl: './pokemon-item.component.html'
 })
 export class PokemonItemComponent {
+  name = 'Pikachu';
+  level = 1;
 
-
+  getHp() {
+    return 100;
+  }
 }

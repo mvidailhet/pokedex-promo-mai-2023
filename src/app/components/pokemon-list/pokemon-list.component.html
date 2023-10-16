@@ -1,0 +1,17 @@
+<h3 class="title">{{ title }}</h3>
+
+
+<div class="row">
+  <div class="col">
+    <input (input)="onInputChange($event)" class="form-control" type="text" />
+  </div>
+  <div class="col-3">
+    <button [disabled]="isButtonDisabled" class="btn btn-primary">test</button>
+  </div>
+</div>
+
+<button (click)="this.onDisableBtnCLick()" class="btn btn-danger">toggle button disable</button>
+
+<app-pokemon-item></app-pokemon-item>
+<app-pokemon-item></app-pokemon-item>
+<app-pokemon-item></app-pokemon-item>
