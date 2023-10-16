@@ -22,12 +22,10 @@
 <app-pokemon-item></app-pokemon-item>
 <app-pokemon-item></app-pokemon-item>
 
-<div *ngIf="isSayingBonjour; else byeBye" class="bg-danger p-3 text-light">
+<div *ngIf="!isSayingBonjour" class="bg-danger p-3 text-light">
   bonjour
 </div>
 
-<ng-template #byeBye>
-  <div class="bg-success p-3 text-light">
-    au revoir
-  </div>
-</ng-template>
+<div *ngIf="isSayingBonjour" class="bg-success p-3 text-light">
+  au revoir
+</div>
