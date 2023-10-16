@@ -1,9 +1,5 @@
 <div
-  class="text-center p-3 my-3"
-  [ngClass]="{
-    'pokemon-male': gender === 'male',
-    'pokemon-female': gender === 'female'
-  }"
+  class="text-center p-3 my-3 pokemon-{{ gender }}"
 >
   {{ name }} - {{ level }} - {{ gender }}
 </div>
