@@ -10,14 +10,10 @@ import { Component } from '@angular/core';
 export class PokemonListComponent {
   title = 'toto';
 
-  isButtonDisabled = false;
+  isSayingBonjour = false;
 
-  toggleButtonDisabled() {
-    this.isButtonDisabled = !this.isButtonDisabled;
-  }
-
-  onDisableBtnCLick() {
-    this.toggleButtonDisabled();
+  onToggleBtnCLick() {
+    this.isSayingBonjour = !this.isSayingBonjour;
   }
 
   onInputChange(event: Event) {
