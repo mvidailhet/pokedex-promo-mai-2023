@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { Utils } from 'src/app/utils';
+
+type Gender = 'male' | 'female' | 'unknown';
+
+interface Pokemon {
+  name: string;
+  gender: Gender;
+}
 
 @Component({
   selector: 'app-pokemon-list',
@@ -10,11 +18,33 @@ import { Component } from '@angular/core';
 export class PokemonListComponent {
   newPokemonName = '';
 
-  pokemons: string[] = [];
+  genders: Gender[] = ['male', 'female', 'unknown'];
+  genderColors = {
+    male: 'blue',
+    female: 'pink',
+    unknown: 'purple',
+  }
+
+  pokemons: Pokemon[] = [{
+    name: 'Pikachu',
+    gender: 'male',
+  }, {
+    name: 'blulbizarre',
+    gender: 'female',
+  }];
 
   addPokemon() {
-    this.pokemons.unshift(this.newPokemonName);
+    const newPokemon: Pokemon = {
+      name: this.newPokemonName,
+      gender: this.getRandomGender(),
+    };
+    this.pokemons.unshift(newPokemon);
     this.newPokemonName = '';
+  }
+
+  getRandomGender() {
+    const randomNumberGender = Utils.getRandomNumber(0, this.genders.length - 1);
+    return this.genders[randomNumberGender];
   }
 
   onInputKeyPress(event: KeyboardEvent) {
