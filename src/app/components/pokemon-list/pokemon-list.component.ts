@@ -8,18 +8,18 @@ import { Component } from '@angular/core';
   ],
 })
 export class PokemonListComponent {
-  title = 'toto';
+  newPokemonName = '';
 
-  isSayingBonjour = false;
+  pokemons: string[] = [];
 
-  onToggleBtnCLick() {
-    this.isSayingBonjour = !this.isSayingBonjour;
+  addPokemon() {
+    this.pokemons.unshift(this.newPokemonName);
+    this.newPokemonName = '';
   }
 
-  onInputChange(event: Event) {
-    const inputElt = event.target as HTMLInputElement;
-    console.log(inputElt.value);
-    this.title = inputElt.value;
+  onInputKeyPress(event: KeyboardEvent) {
+    if (event.code === 'Enter') {
+      this.addPokemon();
+    }
   }
-
 }

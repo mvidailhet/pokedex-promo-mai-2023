@@ -1,31 +1,12 @@
-<h3 class="title">{{ title }}</h3>
-
-
 <div class="row">
   <div class="col">
-    <input (input)="onInputChange($event)" class="form-control" type="text" />
+    <input class="form-control" [(ngModel)]="newPokemonName" (keypress)="onInputKeyPress($event)" type="text" />
   </div>
   <div class="col-3">
-    <button class="btn btn-primary">test</button>
+    <button (click)="addPokemon()" class="btn btn-primary">Ajouter</button>
   </div>
 </div>
 
-<div class="my-4">
-  <input class="form-control" [(ngModel)]="title" type="text" />
-</div>
-
-<button (click)="this.onToggleBtnCLick()" class="btn btn-danger my-4">
-  toggle bonjour
-</button>
-
-<app-pokemon-item></app-pokemon-item>
-<app-pokemon-item></app-pokemon-item>
-<app-pokemon-item></app-pokemon-item>
-
-<div *ngIf="!isSayingBonjour" class="bg-danger p-3 text-light">
-  bonjour
-</div>
-
-<div *ngIf="isSayingBonjour" class="bg-success p-3 text-light">
-  au revoir
+<div *ngFor="let pokemon of pokemons" class="bg-primary text-light p-3 my-3">
+  {{ pokemon }}
 </div>
