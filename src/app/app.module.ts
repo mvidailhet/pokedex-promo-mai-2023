@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
+import { MonPokemon } from './components/mon-pokemon/mon-pokemon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonItemComponent,
-    PokemonListComponent
+    PokemonListComponent,
+    MonPokemon
   ],
   imports: [
     BrowserModule,
