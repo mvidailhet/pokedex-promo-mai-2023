@@ -18,12 +18,10 @@ interface Pokemon {
 export class PokemonListComponent {
   newPokemonName = '';
 
+  addedPokemon = '';
+  duplicatePokemon = '';
+
   genders: Gender[] = ['male', 'female', 'unknown'];
-  genderColors = {
-    male: 'blue',
-    female: 'pink',
-    unknown: 'purple',
-  }
 
   pokemons: Pokemon[] = [{
     name: 'Pikachu',
@@ -33,13 +31,28 @@ export class PokemonListComponent {
     gender: 'female',
   }];
 
+  pokemonAlreadyExists(pokemonName: string) {
+    const pokemonWithSameName = this.pokemons.find((pokemon) => {
+      return pokemonName === pokemon.name;
+    });
+    return pokemonWithSameName !== undefined;
+  }
+
   addPokemon() {
+    if (this.pokemonAlreadyExists(this.newPokemonName)) {
+      this.duplicatePokemon = this.newPokemonName;
+      this.closeToastAfterSomeTime();
+      return;
+    }
+
     const newPokemon: Pokemon = {
       name: this.newPokemonName,
       gender: this.getRandomGender(),
     };
     this.pokemons.unshift(newPokemon);
+    this.addedPokemon = this.newPokemonName;
     this.newPokemonName = '';
+    this.closeToastAfterSomeTime();
   }
 
   getRandomGender() {
@@ -51,5 +64,16 @@ export class PokemonListComponent {
     if (event.code === 'Enter') {
       this.addPokemon();
     }
+  }
+
+  closeToastAfterSomeTime() {
+    setTimeout(() => {
+      this.onToastClose();
+    }, 2000);
+  }
+
+  onToastClose() {
+    this.addedPokemon = '';
+    this.duplicatePokemon = '';
   }
 }
