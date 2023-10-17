@@ -10,27 +10,16 @@ import { Component } from '@angular/core';
 export class PokemonListComponent {
   title = 'toto';
 
-  isButtonDisabled = false;
+  isSayingBonjour = false;
 
-  constructor() {
-  }
-
-  toggleButtonDisabled() {
-    this.isButtonDisabled = !this.isButtonDisabled;
-  }
-
-  onDisableBtnCLick() {
-    this.toggleButtonDisabled();
+  onToggleBtnCLick() {
+    this.isSayingBonjour = !this.isSayingBonjour;
   }
 
   onInputChange(event: Event) {
-    //console.log(event);
     const inputElt = event.target as HTMLInputElement;
     console.log(inputElt.value);
-
     this.title = inputElt.value;
-    //console.log(event.target.value);
-
   }
 
 }

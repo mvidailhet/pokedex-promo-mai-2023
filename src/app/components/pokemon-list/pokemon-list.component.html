@@ -6,12 +6,26 @@
     <input (input)="onInputChange($event)" class="form-control" type="text" />
   </div>
   <div class="col-3">
-    <button [disabled]="isButtonDisabled" class="btn btn-primary">test</button>
+    <button class="btn btn-primary">test</button>
   </div>
 </div>
 
-<button (click)="this.onDisableBtnCLick()" class="btn btn-danger">toggle button disable</button>
+<div class="my-4">
+  <input class="form-control" [(ngModel)]="title" type="text" />
+</div>
+
+<button (click)="this.onToggleBtnCLick()" class="btn btn-danger my-4">
+  toggle bonjour
+</button>
 
 <app-pokemon-item></app-pokemon-item>
 <app-pokemon-item></app-pokemon-item>
 <app-pokemon-item></app-pokemon-item>
+
+<div *ngIf="!isSayingBonjour" class="bg-danger p-3 text-light">
+  bonjour
+</div>
+
+<div *ngIf="isSayingBonjour" class="bg-success p-3 text-light">
+  au revoir
+</div>
