@@ -1,5 +1,10 @@
 <div
-  class="text-center p-3 my-3 pokemon-{{ gender }}"
+  class="p-3 align-items-center row my-3 pokemon-{{ gender }}"
 >
-  {{ name }} - {{ level }} - {{ gender }}
+  <div class="col">
+    {{ name }} - {{ level }} - {{ gender }}
+  </div>
+  <div class="col btn-delete-col">
+    <button (click)="onDeleteBtnClick()" class="btn btn-primary">Supprimer</button>
+  </div>
 </div>

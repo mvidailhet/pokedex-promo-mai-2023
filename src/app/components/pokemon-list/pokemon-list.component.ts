@@ -6,6 +6,7 @@ type Gender = 'male' | 'female' | 'unknown';
 interface Pokemon {
   name: string;
   gender: Gender;
+  level: number;
 }
 
 @Component({
@@ -57,6 +58,7 @@ export class PokemonListComponent {
     const newPokemon: Pokemon = {
       name: this.newPokemonName,
       gender: this.getRandomGender(),
+      level: Utils.getRandomNumber(1, 5),
     };
     this.pokemons.unshift(newPokemon);
     this.addedPokemon = this.newPokemonName;
@@ -91,5 +93,11 @@ export class PokemonListComponent {
   onDeletePokemon(pokemonIndexToDelete: number) {
     this.pokemons.splice(pokemonIndexToDelete, 1);
     this.storePokemonsInLocalStorage();
+  }
+
+  onPokemonItemDelete(indexToDelete: number, pokemonName: string) {
+    console.log(pokemonName);
+    this.pokemons.splice(indexToDelete, 1);
+    console.log(`deleting pokemon ${pokemonName}`);
   }
 }

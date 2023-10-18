@@ -14,29 +14,49 @@
 
 <div
   *ngFor="let pokemon of pokemons; let pokemonIndex = index"
-  class="p-3 row my-3 align-items-center pokemon-gender pokemon-gender-{{ pokemon.gender }}"
+  class="p-3 row my-3 align-items-center pokemon-gender pokemon-gender-{{
+    pokemon.gender
+  }}"
 >
-  <div class="col">
-    {{ pokemon.name }} - {{ pokemon.gender }}
-  </div>
+  <div class="col">{{ pokemon.name }} - {{ pokemon.gender }}</div>
   <div class="col btn-delete-col">
-    <button (click)="onDeletePokemon(pokemonIndex)" class="btn btn-danger">Supprimer</button>
+    <button (click)="onDeletePokemon(pokemonIndex)" class="btn btn-danger">
+      Supprimer
+    </button>
   </div>
 </div>
 
+<br><br><br>
+<hr><hr><hr><hr>
+<br><br><br>
+
+<app-pokemon-item
+  *ngFor="let pokemon of pokemons; let pokemonIndex = index"
+  [name]="pokemon.name"
+  [level]="pokemon.level"
+  (delete)="onPokemonItemDelete(pokemonIndex, $event)"
+></app-pokemon-item>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div class="toast" [ngClass]="{ 'show': addedPokemon || duplicatePokemon }" role="alert" aria-live="assertive" aria-atomic="true">
+  <div
+    class="toast"
+    [ngClass]="{ show: addedPokemon || duplicatePokemon }"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
     <div class="toast-header">
       <strong class="me-auto">
-        <ng-container *ngIf="addedPokemon">
-          Pokémon ajouté
-        </ng-container>
-        <ng-container *ngIf="duplicatePokemon">
-          Pokémon dupliqué
-        </ng-container>
+        <ng-container *ngIf="addedPokemon"> Pokémon ajouté </ng-container>
+        <ng-container *ngIf="duplicatePokemon"> Pokémon dupliqué </ng-container>
       </strong>
-      <button type="button" (click)="onToastClose()" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      <button
+        type="button"
+        (click)="onToastClose()"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
     </div>
     <div class="toast-body">
       <div *ngIf="addedPokemon">
@@ -48,4 +68,3 @@
     </div>
   </div>
 </div>
-
