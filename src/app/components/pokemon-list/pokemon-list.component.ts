@@ -13,11 +13,8 @@ export class PokemonListComponent {
   addedPokemon = '';
   duplicatePokemon = '';
 
-  pokemons = this.pokemonService.pokemons;
-
   constructor(
-    private loggingService: LoggingService,
-    private pokemonService: PokemonService
+    public pokemonService: PokemonService
   ) {
     this.pokemonService.loadPokemonsFromStorage();
   }

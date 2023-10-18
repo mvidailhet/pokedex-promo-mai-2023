@@ -60,12 +60,6 @@ export class PokemonService {
     this.closeToastAfterSomeTime();
  */
     this.storePokemonsInLocalStorage();
-
-
-    setTimeout(() => {
-      this.pokemons[0] = { ...this.pokemons[0], name: 'nouveau pokemon' }
-    }, 3000);
-
   }
 
   deletePokemon(indexToDelete: number) {
