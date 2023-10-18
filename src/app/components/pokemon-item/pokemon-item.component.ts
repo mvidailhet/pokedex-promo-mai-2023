@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
 import { Pokemon } from "src/app/models/pokemon";
 
 @Component({
@@ -6,8 +6,20 @@ import { Pokemon } from "src/app/models/pokemon";
   templateUrl: './pokemon-item.component.html',
   styleUrls: ['./pokemon-item.component.scss']
 })
-export class PokemonItemComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() pokemon?: Pokemon;
+export class PokemonItemComponent implements OnInit, OnDestroy {
+  private _pokemon?: Pokemon | undefined;
+
+  @Input()
+  public get pokemon(): Pokemon | undefined {
+    return this._pokemon;
+  }
+
+  public set pokemon(value: Pokemon | undefined) {
+    this._pokemon = value;
+    console.log('setting pokemon');
+  }
+
+
   @Output() delete = new EventEmitter<string>();
 
   onDeleteBtnClick() {
@@ -18,10 +30,6 @@ export class PokemonItemComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit(): void {
     if (!this.pokemon) return;
     console.log(`init pokemon ${ this.pokemon.name }`);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
   }
 
   ngOnDestroy(): void {
