@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
+import { Gender, Pokemon } from 'src/app/models/pokemon';
 import { Utils } from 'src/app/utils';
-
-type Gender = 'male' | 'female' | 'unknown';
-
-interface Pokemon {
-  name: string;
-  gender: Gender;
-  level: number;
-}
 
 @Component({
   selector: 'app-pokemon-list',
@@ -88,11 +81,6 @@ export class PokemonListComponent {
   onToastClose() {
     this.addedPokemon = '';
     this.duplicatePokemon = '';
-  }
-
-  onDeletePokemon(pokemonIndexToDelete: number) {
-    this.pokemons.splice(pokemonIndexToDelete, 1);
-    this.storePokemonsInLocalStorage();
   }
 
   onPokemonItemDelete(indexToDelete: number, pokemonName: string) {

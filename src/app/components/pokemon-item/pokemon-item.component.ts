@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Gender } from "src/app/models/pokemon";
 import { Utils } from "src/app/utils";
 
 @Component({
@@ -7,16 +8,10 @@ import { Utils } from "src/app/utils";
   styleUrls: ['./pokemon-item.component.scss']
 })
 export class PokemonItemComponent {
-  @Input() name = 'Pikachu';
-  @Input() level = 1;
+  @Input() name?: string;
+  @Input() level?: number;
+  @Input() gender?: Gender;
   @Output() delete = new EventEmitter<string>();
-
-  gender: 'male' | 'female';
-
-  constructor() {
-    const randomNumber = Utils.getRandomNumber(1, 2);
-    this.gender = randomNumber === 1 ? 'male' : 'female';
-  }
 
   onDeleteBtnClick() {
     this.delete.emit(this.name);
