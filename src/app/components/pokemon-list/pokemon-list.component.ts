@@ -23,19 +23,28 @@ export class PokemonListComponent {
 
   genders: Gender[] = ['male', 'female', 'unknown'];
 
-  pokemons: Pokemon[] = [{
-    name: 'Pikachu',
-    gender: 'male',
-  }, {
-    name: 'blulbizarre',
-    gender: 'female',
-  }];
+  pokemons: Pokemon[] = [];
+
+  constructor() {
+    this.loadPokemonsFromStorage();
+  }
 
   pokemonAlreadyExists(pokemonName: string) {
     const pokemonWithSameName = this.pokemons.find((pokemon) => {
       return pokemonName.toLowerCase() === pokemon.name.toLowerCase();
     });
     return pokemonWithSameName !== undefined;
+  }
+
+  storePokemonsInLocalStorage() {
+    const pokemonsJson = JSON.stringify(this.pokemons);
+    localStorage.setItem('pokemons', pokemonsJson);
+  }
+
+  loadPokemonsFromStorage() {
+    const pokemonsStr = localStorage.getItem('pokemons');
+    if (pokemonsStr === null) return;
+    this.pokemons = JSON.parse(pokemonsStr);
   }
 
   addPokemon() {
@@ -53,6 +62,8 @@ export class PokemonListComponent {
     this.addedPokemon = this.newPokemonName;
     this.newPokemonName = '';
     this.closeToastAfterSomeTime();
+
+    this.storePokemonsInLocalStorage();
   }
 
   getRandomGender() {
@@ -79,5 +90,6 @@ export class PokemonListComponent {
 
   onDeletePokemon(pokemonIndexToDelete: number) {
     this.pokemons.splice(pokemonIndexToDelete, 1);
+    this.storePokemonsInLocalStorage();
   }
 }
