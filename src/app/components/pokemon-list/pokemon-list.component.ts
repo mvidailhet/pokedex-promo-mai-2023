@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { Gender, Pokemon } from 'src/app/models/pokemon';
-import { Utils } from 'src/app/utils';
+import { LoggingService } from 'src/app/services/logging.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
-  styleUrls: [
-    './pokemon-list.component.scss'
-  ],
+  styleUrls: ['./pokemon-list.component.scss'],
 })
 export class PokemonListComponent {
   newPokemonName = '';
@@ -15,66 +13,22 @@ export class PokemonListComponent {
   addedPokemon = '';
   duplicatePokemon = '';
 
-  genders: Gender[] = ['male', 'female', 'unknown'];
+  pokemons = this.pokemonService.pokemons;
 
-  pokemons: Pokemon[] = [];
-
-  constructor() {
-    this.loadPokemonsFromStorage();
-  }
-
-  pokemonAlreadyExists(pokemonName: string) {
-    const pokemonWithSameName = this.pokemons.find((pokemon) => {
-      return pokemonName.toLowerCase() === pokemon.name.toLowerCase();
-    });
-    return pokemonWithSameName !== undefined;
-  }
-
-  storePokemonsInLocalStorage() {
-    const pokemonsJson = JSON.stringify(this.pokemons);
-    localStorage.setItem('pokemons', pokemonsJson);
-  }
-
-  loadPokemonsFromStorage() {
-    const pokemonsStr = localStorage.getItem('pokemons');
-    if (pokemonsStr === null) return;
-    this.pokemons = JSON.parse(pokemonsStr);
+  constructor(
+    private loggingService: LoggingService,
+    private pokemonService: PokemonService
+  ) {
+    this.pokemonService.loadPokemonsFromStorage();
   }
 
   addPokemon() {
-    if (this.pokemonAlreadyExists(this.newPokemonName)) {
-      this.duplicatePokemon = this.newPokemonName;
-      this.closeToastAfterSomeTime();
-      return;
-    }
-
-    const newPokemon: Pokemon = {
-      name: this.newPokemonName,
-      gender: this.getRandomGender(),
-      level: Utils.getRandomNumber(1, 5),
-    };
-    this.pokemons.unshift(newPokemon);
-    this.addedPokemon = this.newPokemonName;
-    this.newPokemonName = '';
-    this.closeToastAfterSomeTime();
-
-    this.storePokemonsInLocalStorage();
-
-
-    setTimeout(() => {
-      this.pokemons[0] = { ...this.pokemons[0], name: 'nouveau pokemon' }
-    }, 3000);
-
-  }
-
-  getRandomGender() {
-    const randomNumberGender = Utils.getRandomNumber(0, this.genders.length - 1);
-    return this.genders[randomNumberGender];
+    this.pokemonService.addPokemon(this.newPokemonName);
   }
 
   onInputKeyPress(event: KeyboardEvent) {
     if (event.code === 'Enter') {
-      this.addPokemon();
+      this.pokemonService.addPokemon(this.newPokemonName);
     }
   }
 
@@ -89,8 +43,7 @@ export class PokemonListComponent {
     this.duplicatePokemon = '';
   }
 
-  onPokemonItemDelete(indexToDelete: number, pokemonName: string) {
-    this.pokemons.splice(indexToDelete, 1);
-    this.storePokemonsInLocalStorage();
+  onPokemonItemDelete(indexToDelete: number) {
+    this.pokemonService.deletePokemon(indexToDelete);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
 import { Pokemon } from "src/app/models/pokemon";
+import { LoggingService } from "src/app/services/logging.service";
 
 @Component({
   selector: 'app-pokemon-item',
@@ -16,9 +17,10 @@ export class PokemonItemComponent implements OnInit, OnDestroy {
 
   public set pokemon(value: Pokemon | undefined) {
     this._pokemon = value;
-    console.log('setting pokemon');
   }
 
+  constructor(private loggingService: LoggingService) {
+  }
 
   @Output() delete = new EventEmitter<string>();
 
