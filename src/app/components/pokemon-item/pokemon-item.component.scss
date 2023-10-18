@@ -1,10 +1,3 @@
-:host {
-  display: block;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: aqua;
-}
-
 .row {
   --bs-gutter-x: 0;
 }
@@ -21,8 +14,4 @@
 
 .btn-delete-col {
   text-align: right;
-}
-
-.pokemon-name {
-  color: purple;
 }
