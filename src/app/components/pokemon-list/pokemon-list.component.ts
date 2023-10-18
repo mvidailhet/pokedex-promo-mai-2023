@@ -33,7 +33,7 @@ export class PokemonListComponent {
 
   pokemonAlreadyExists(pokemonName: string) {
     const pokemonWithSameName = this.pokemons.find((pokemon) => {
-      return pokemonName === pokemon.name;
+      return pokemonName.toLowerCase() === pokemon.name.toLowerCase();
     });
     return pokemonWithSameName !== undefined;
   }
@@ -75,5 +75,13 @@ export class PokemonListComponent {
   onToastClose() {
     this.addedPokemon = '';
     this.duplicatePokemon = '';
+  }
+
+  onDeletePokemon(pokemonToDelete: Pokemon) {
+    const indexPokemonToDelete = this.pokemons.findIndex((pokemon) => {
+      return pokemon.name === pokemonToDelete.name;
+    });
+
+    this.pokemons.splice(indexPokemonToDelete, 1);
   }
 }

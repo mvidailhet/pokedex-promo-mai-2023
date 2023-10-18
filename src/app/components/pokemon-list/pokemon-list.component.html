@@ -14,9 +14,14 @@
 
 <div
   *ngFor="let pokemon of pokemons"
-  class="p-3 my-3 pokemon-gender pokemon-gender-{{ pokemon.gender }}"
+  class="p-3 row my-3 align-items-center pokemon-gender pokemon-gender-{{ pokemon.gender }}"
 >
-  {{ pokemon.name }} - {{ pokemon.gender }}
+  <div class="col">
+    {{ pokemon.name }} - {{ pokemon.gender }}
+  </div>
+  <div class="col btn-delete-col">
+    <button (click)="onDeletePokemon(pokemon)" class="btn btn-danger">Supprimer</button>
+  </div>
 </div>
 
 
