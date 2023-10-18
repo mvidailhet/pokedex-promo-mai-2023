@@ -77,11 +77,7 @@ export class PokemonListComponent {
     this.duplicatePokemon = '';
   }
 
-  onDeletePokemon(pokemonToDelete: Pokemon) {
-    const indexPokemonToDelete = this.pokemons.findIndex((pokemon) => {
-      return pokemon.name === pokemonToDelete.name;
-    });
-
-    this.pokemons.splice(indexPokemonToDelete, 1);
+  onDeletePokemon(pokemonIndexToDelete: number) {
+    this.pokemons.splice(pokemonIndexToDelete, 1);
   }
 }

@@ -13,14 +13,14 @@
 </div>
 
 <div
-  *ngFor="let pokemon of pokemons"
+  *ngFor="let pokemon of pokemons; let pokemonIndex = index"
   class="p-3 row my-3 align-items-center pokemon-gender pokemon-gender-{{ pokemon.gender }}"
 >
   <div class="col">
     {{ pokemon.name }} - {{ pokemon.gender }}
   </div>
   <div class="col btn-delete-col">
-    <button (click)="onDeletePokemon(pokemon)" class="btn btn-danger">Supprimer</button>
+    <button (click)="onDeletePokemon(pokemonIndex)" class="btn btn-danger">Supprimer</button>
   </div>
 </div>
 
