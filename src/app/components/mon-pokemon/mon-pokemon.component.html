@@ -1,4 +1,6 @@
-<div class="text-center text-bg-secondary text-light p-3 my-3" >
-  {{ pokemon.name }} - {{ pokemon.type }}
-  <button class="btn btn-success" (click)="this.generateRandomPkmn()" [disabled]="isButtonDisabled">Change</button>
+<div *ngFor="let pokemon of pokemons">
+  <div class="text-center text-bg-secondary text-light p-3 my-3">
+    {{ pokemon.name }} - {{ pokemon.type }}
+    <button class="btn btn-success" (click)="this.generateRandomPkmn()" [disabled]="isButtonDisabled">Change</button>
+  </div>
 </div>
