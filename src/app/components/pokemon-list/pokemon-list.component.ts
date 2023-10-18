@@ -59,6 +59,12 @@ export class PokemonListComponent {
     this.closeToastAfterSomeTime();
 
     this.storePokemonsInLocalStorage();
+
+
+    setTimeout(() => {
+      this.pokemons[0] = { ...this.pokemons[0], name: 'nouveau pokemon' }
+    }, 3000);
+
   }
 
   getRandomGender() {
@@ -84,8 +90,7 @@ export class PokemonListComponent {
   }
 
   onPokemonItemDelete(indexToDelete: number, pokemonName: string) {
-    console.log(pokemonName);
     this.pokemons.splice(indexToDelete, 1);
-    console.log(`deleting pokemon ${pokemonName}`);
+    this.storePokemonsInLocalStorage();
   }
 }

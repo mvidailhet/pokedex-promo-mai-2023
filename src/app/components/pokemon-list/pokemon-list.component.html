@@ -14,9 +14,7 @@
 
 <app-pokemon-item
   *ngFor="let pokemon of pokemons; let pokemonIndex = index"
-  [name]="pokemon.name"
-  [level]="pokemon.level"
-  [gender]="pokemon.gender"
+  [pokemon]="pokemon"
   (delete)="onPokemonItemDelete(pokemonIndex, $event)"
 ></app-pokemon-item>
 
