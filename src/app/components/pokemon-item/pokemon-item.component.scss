@@ -1,14 +1,20 @@
+$gender-female-color: #e965eb;
+
+:host {
+  --gender-male-color: #007bff;
+}
+
 .row {
   --bs-gutter-x: 0;
 }
 
 .pokemon-male {
-  background-color: blue;
+  background-color: var(--gender-male-color);
   color: white;
 }
 
 .pokemon-female {
-  background-color: pink;
+  background-color: $gender-female-color;
   color: black;
 }
 
