@@ -31,11 +31,9 @@ export class PokemonItemComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (!this.pokemon) return;
-    console.log(`init pokemon ${ this.pokemon.name }`);
   }
 
   ngOnDestroy(): void {
     if (!this.pokemon) return;
-    console.log(`destroy pokemon ${ this.pokemon.name }`);
   }
 }
