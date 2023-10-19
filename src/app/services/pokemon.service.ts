@@ -42,9 +42,7 @@ export class PokemonService {
 
   addPokemon(newPokemonName: string) {
     if (this.pokemonAlreadyExists(newPokemonName)) {
-      //this.duplicatePokemon = newPokemonName;
-      //this.closeToastAfterSomeTime();
-      return;
+      return null;
     }
 
     console.log('adding pokemon' + newPokemonName);
@@ -55,11 +53,9 @@ export class PokemonService {
       level: Utils.getRandomNumber(1, 5),
     };
     this.pokemons = [newPokemon, ...this.pokemons];
-/*     this.addedPokemon = this.newPokemonName;
-    this.newPokemonName = '';
-    this.closeToastAfterSomeTime();
- */
     this.storePokemonsInLocalStorage();
+
+    return newPokemon;
   }
 
   deletePokemon(indexToDelete: number) {

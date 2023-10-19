@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoggingService } from 'src/app/services/logging.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
@@ -13,16 +12,21 @@ export class PokemonListComponent {
   addedPokemon = '';
   duplicatePokemon = '';
 
-  pokemons = this.pokemonService.pokemons;
-
   constructor(
-    private pokemonService: PokemonService
+    public pokemonService: PokemonService
   ) {
     this.pokemonService.loadPokemonsFromStorage();
   }
 
   addPokemon() {
-    this.pokemonService.addPokemon(this.newPokemonName);
+    const addedPokemon = this.pokemonService.addPokemon(this.newPokemonName);
+    if (addedPokemon) {
+      this.addedPokemon = this.newPokemonName;
+    } else {
+      this.duplicatePokemon = this.newPokemonName;
+    }
+    this.newPokemonName = '';
+    this.closeToastAfterSomeTime();
   }
 
   onInputKeyPress(event: KeyboardEvent) {
