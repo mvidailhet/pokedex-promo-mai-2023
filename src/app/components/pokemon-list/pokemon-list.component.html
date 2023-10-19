@@ -13,7 +13,7 @@
 </div>
 
 <app-pokemon-item
-  *ngFor="let pokemon of pokemonService.pokemons; let pokemonIndex = index"
+  *ngFor="let pokemon of pokemons; let pokemonIndex = index"
   [pokemon]="pokemon"
   (delete)="onPokemonItemDelete(pokemonIndex)"
 ></app-pokemon-item>
