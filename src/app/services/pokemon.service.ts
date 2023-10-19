@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Gender, Pokemon } from '../models/pokemon';
+import { Gender, LocalPokemon, Pokemon } from '../models/pokemon';
 import { Utils } from '../utils';
-import { ApiService, GetResult } from './api.service';
+import { ApiService, GetResult, PostResult } from './api.service';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class PokemonService {
     .subscribe((getResult: GetResult) => {
       const ids = Object.keys(getResult);
       this.pokemons = ids.map((id: string) => {
-        return getResult[id];
+        return { ...getResult[id], id: id };
       });
     });
   }
@@ -31,6 +31,7 @@ export class PokemonService {
     this.apiService.getPokemons()
     .subscribe((apiPokemons: Pokemon[]) => {
       this.pokemons = apiPokemons;
+      console.log(this.pokemons);
     });
   }
 
@@ -54,21 +55,24 @@ export class PokemonService {
       return null;
     }
 
-    const newPokemon: Pokemon = {
+    const newPokemon: LocalPokemon = {
       name: newPokemonName,
       gender: this.getRandomGender(),
       level: Utils.getRandomNumber(1, 5),
     };
-    this.pokemons = [newPokemon, ...this.pokemons];
 
-    this.apiService.postPokemon(newPokemon);
+    this.apiService.postPokemon(newPokemon)
+    .subscribe((postResult: PostResult) => {
+      const idNewPokemon = postResult.name;
+      const newPokemonWithId: Pokemon = { ...newPokemon, id: idNewPokemon };
+      this.pokemons = [newPokemonWithId, ...this.pokemons];
+    });
 
     return newPokemon;
   }
 
   deletePokemon(indexToDelete: number) {
+    this.apiService.deletePokemon(this.pokemons[indexToDelete].id).subscribe();
     this.pokemons.splice(indexToDelete, 1);
   }
-
-
 }

@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pokemon } from '../models/pokemon';
+import { LocalPokemon, Pokemon } from '../models/pokemon';
 import { delay, map } from 'rxjs';
 
-interface PostResult {
+export interface PostResult {
   name: string;
 }
 
 export interface GetResult {
-  [id: string]: Pokemon;
+  [id: string]: LocalPokemon;
 }
 
 @Injectable({
@@ -20,12 +20,9 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  postPokemon(pokemon: Pokemon) {
-    this.httpClient
-      .post<PostResult>(`${this.apiUrl}/pokemons.json`, pokemon)
-      .subscribe((res: PostResult) => {
-        console.log(res);
-      });
+  postPokemon(pokemon: LocalPokemon) {
+    return this.httpClient
+      .post<PostResult>(`${this.apiUrl}/pokemons.json`, pokemon);
   }
 
   getPokemonsResult() {
@@ -39,10 +36,15 @@ export class ApiService {
       map((getResult: GetResult) => {
         const ids = Object.keys(getResult);
         const pokemons: Pokemon[] = ids.map((id: string) => {
-          return getResult[id];
+          const currentPokemon: LocalPokemon = getResult[id];
+          return { ...currentPokemon, id: id };
         });
         return pokemons;
       })
     )
+  }
+
+  deletePokemon(id: string) {
+    return this.httpClient.delete(`${this.apiUrl}/pokemons/${id}.json`);
   }
 }
