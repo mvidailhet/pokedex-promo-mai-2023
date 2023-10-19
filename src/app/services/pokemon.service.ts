@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Gender, Pokemon } from '../models/pokemon';
+import { Gender, LocalPokemon, Pokemon } from '../models/pokemon';
 import { Utils } from '../utils';
+import { ApiService, GetResult, PostResult } from './api.service';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,27 @@ export class PokemonService {
 
   pokemons: Pokemon[] = [];
 
-  constructor() {
-    this.loadPokemonsFromStorage();
+  constructor(private apiService: ApiService) {
+    this.loadPokemonsFromAPI();
+    //this.loadPokemonsResultFromAPI();
+  }
+
+  loadPokemonsResultFromAPI() {
+    this.apiService.getPokemonsResult()
+    .subscribe((getResult: GetResult) => {
+      const ids = Object.keys(getResult);
+      this.pokemons = ids.map((id: string) => {
+        return { ...getResult[id], id: id };
+      });
+    });
+  }
+
+  loadPokemonsFromAPI() {
+    this.apiService.getPokemons()
+    .subscribe((apiPokemons: Pokemon[]) => {
+      this.pokemons = apiPokemons;
+      console.log(this.pokemons);
+    });
   }
 
   pokemonAlreadyExists(pokemonName: string) {
@@ -19,17 +40,6 @@ export class PokemonService {
       return pokemonName.toLowerCase() === pokemon.name.toLowerCase();
     });
     return pokemonWithSameName !== undefined;
-  }
-
-  storePokemonsInLocalStorage() {
-    const pokemonsJson = JSON.stringify(this.pokemons);
-    localStorage.setItem('pokemons', pokemonsJson);
-  }
-
-  loadPokemonsFromStorage() {
-    const pokemonsStr = localStorage.getItem('pokemons');
-    if (pokemonsStr === null) return;
-    this.pokemons = JSON.parse(pokemonsStr);
   }
 
   getRandomGender() {
@@ -45,23 +55,24 @@ export class PokemonService {
       return null;
     }
 
-    console.log('adding pokemon' + newPokemonName);
-
-    const newPokemon: Pokemon = {
+    const newPokemon: LocalPokemon = {
       name: newPokemonName,
       gender: this.getRandomGender(),
       level: Utils.getRandomNumber(1, 5),
     };
-    this.pokemons = [newPokemon, ...this.pokemons];
-    this.storePokemonsInLocalStorage();
+
+    this.apiService.postPokemon(newPokemon)
+    .subscribe((postResult: PostResult) => {
+      const idNewPokemon = postResult.name;
+      const newPokemonWithId: Pokemon = { ...newPokemon, id: idNewPokemon };
+      this.pokemons = [newPokemonWithId, ...this.pokemons];
+    });
 
     return newPokemon;
   }
 
   deletePokemon(indexToDelete: number) {
+    this.apiService.deletePokemon(this.pokemons[indexToDelete].id).subscribe();
     this.pokemons.splice(indexToDelete, 1);
-    this.storePokemonsInLocalStorage();
   }
-
-
 }

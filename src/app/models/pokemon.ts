@@ -1,7 +1,12 @@
 export type Gender = 'male' | 'female' | 'unknown';
 
-export interface Pokemon {
+
+export interface LocalPokemon {
   name: string;
   gender: Gender;
   level: number;
+}
+
+export interface Pokemon extends LocalPokemon {
+  id: string;
 }
