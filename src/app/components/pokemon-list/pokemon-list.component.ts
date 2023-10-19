@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
@@ -15,11 +14,8 @@ export class PokemonListComponent {
 
   constructor(
     public pokemonService: PokemonService,
-    private apiService: ApiService
   ) {
     this.pokemonService.loadPokemonsFromStorage();
-
-    //this.apiService.postPokemon();
   }
 
   addPokemon() {

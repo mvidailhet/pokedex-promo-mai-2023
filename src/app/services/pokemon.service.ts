@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Gender, Pokemon } from '../models/pokemon';
 import { Utils } from '../utils';
+import { ApiService } from './api.service';
+import { map } from 'rxjs';
+
+interface PokemonsRes {
+  [id: string]: Pokemon;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +16,19 @@ export class PokemonService {
 
   pokemons: Pokemon[] = [];
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.loadPokemonsFromStorage();
+
+    this.apiService.getPokemons()
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    )
+    .subscribe((res: any) => {
+      console.log(res);
+    });
+
   }
 
   pokemonAlreadyExists(pokemonName: string) {
@@ -19,11 +36,6 @@ export class PokemonService {
       return pokemonName.toLowerCase() === pokemon.name.toLowerCase();
     });
     return pokemonWithSameName !== undefined;
-  }
-
-  storePokemonsInLocalStorage() {
-    const pokemonsJson = JSON.stringify(this.pokemons);
-    localStorage.setItem('pokemons', pokemonsJson);
   }
 
   loadPokemonsFromStorage() {
@@ -45,22 +57,20 @@ export class PokemonService {
       return null;
     }
 
-    console.log('adding pokemon' + newPokemonName);
-
     const newPokemon: Pokemon = {
       name: newPokemonName,
       gender: this.getRandomGender(),
       level: Utils.getRandomNumber(1, 5),
     };
     this.pokemons = [newPokemon, ...this.pokemons];
-    this.storePokemonsInLocalStorage();
+
+    this.apiService.postPokemon(newPokemon);
 
     return newPokemon;
   }
 
   deletePokemon(indexToDelete: number) {
     this.pokemons.splice(indexToDelete, 1);
-    this.storePokemonsInLocalStorage();
   }
 
 
