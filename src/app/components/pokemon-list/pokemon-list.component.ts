@@ -15,7 +15,6 @@ export class PokemonListComponent {
   constructor(
     public pokemonService: PokemonService,
   ) {
-    this.pokemonService.loadPokemonsFromStorage();
   }
 
   addPokemon() {

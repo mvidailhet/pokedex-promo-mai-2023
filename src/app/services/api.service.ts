@@ -1,9 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pokemon } from '../models/pokemon';
+import { map } from 'rxjs';
 
 interface PostResult {
   name: string;
+}
+
+export interface GetResult {
+  [id: string]: Pokemon;
 }
 
 @Injectable({
@@ -23,7 +28,20 @@ export class ApiService {
       });
   }
 
+  getPokemonsResult() {
+    return this.httpClient.get<GetResult>(`${this.apiUrl}/pokemons.json`);
+  }
+
   getPokemons() {
-    return this.httpClient.get(`${this.apiUrl}/pokemons.json`);
+    return this.httpClient.get<GetResult>(`${this.apiUrl}/pokemons.json`)
+    .pipe(
+      map((getResult: GetResult) => {
+        const ids = Object.keys(getResult);
+        const pokemons: Pokemon[] = ids.map((id: string) => {
+          return getResult[id];
+        });
+        return pokemons;
+      })
+    )
   }
 }
