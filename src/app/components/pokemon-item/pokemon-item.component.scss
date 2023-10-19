@@ -1,9 +1,30 @@
-.pokemon-male {
-  background-color: blue;
+:host {
+  --gender-male-color: #007bff;
+  --gender-female-color: #f54ecb;
+  --gender-unknown-color: #b931e7;
+}
+
+.row {
+  --bs-gutter-x: 0;
+}
+
+.pokemon {
   color: white;
 }
 
+.pokemon-male {
+  background-color: var(--gender-male-color);
+}
+
 .pokemon-female {
-  background-color: pink;
+  background-color: var(--gender-female-color);
   color: black;
+}
+
+.pokemon-unknown {
+  background-color: var(--gender-unknown-color);
+}
+
+.btn-delete-col {
+  text-align: right;
 }

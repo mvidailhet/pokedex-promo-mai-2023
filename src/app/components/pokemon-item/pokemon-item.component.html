@@ -1,5 +1,15 @@
 <div
-  class="text-center p-3 my-3 pokemon-{{ gender }}"
+  class="p-3 align-items-center row my-3 pokemon pokemon-{{ pokemon.gender }}"
+  *ngIf="pokemon"
 >
-  {{ name }} - {{ level }} - {{ gender }}
+  <div class="col">
+    <span class="pokemon-name">{{ pokemon.name }}</span> -
+    {{ pokemon.level }} -
+    <span class="pokemon-gender">{{ pokemon.gender }}</span>
+  </div>
+  <div class="col btn-delete-col">
+    <button (click)="onDeleteBtnClick()" class="btn btn-primary">
+      Supprimer
+    </button>
+  </div>
 </div>

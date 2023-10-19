@@ -1,86 +1,46 @@
 import { Component } from '@angular/core';
+import { LoggingService } from 'src/app/services/logging.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
-  styleUrls: [
-    './pokemon-list.component.scss'
-  ],
+  styleUrls: ['./pokemon-list.component.scss'],
 })
 export class PokemonListComponent {
-  title = 'toto';
+  newPokemonName = '';
 
-  newPkmnName = '';
-  newPkmnType = '';
-  pkmnHasBeenAdded = false;
-  pkmnAlreadyExist = false;
+  addedPokemon = '';
+  duplicatePokemon = '';
 
-  isSayingBonjour = false;
-
-  pokemons = [
-    {
-      name: 'Bulbizarre',
-      type: 'plante',
-    },
-    {
-      name: 'Salamèche',
-      type: 'feu',
-    },
-    {
-      name: 'carapuce',
-      type: 'eau',
-    },
-    {
-      name: 'Roucool',
-      type: 'vol',
-    },
-    {
-      name: 'Mélofée',
-      type: 'fée',
-    },
-  ];
-
-  onToggleBtnCLick() {
-    this.isSayingBonjour = !this.isSayingBonjour;
+  constructor(
+    public pokemonService: PokemonService
+  ) {
+    this.pokemonService.loadPokemonsFromStorage();
   }
 
-  onInputChange(event: Event) {
-    const inputElt = event.target as HTMLInputElement;
-    console.log(inputElt.value);
-    this.title = inputElt.value;
+  addPokemon() {
+    this.pokemonService.addPokemon(this.newPokemonName);
   }
 
-  addPkmn(){
-    const pkmnAlreadyExist = this.pkmnAlreadyExiste()
-    if(pkmnAlreadyExist){
-      this.pkmnAlreadyExist = true;
-      return ;
-    }
-    this.pokemons.unshift({
-      name: this.newPkmnName,
-      type: this.newPkmnType,
-    })
-    this.pkmnHasBeenAdded = true;
-  }
   onInputKeyPress(event: KeyboardEvent) {
-    console.log(event.code);
-    if(event.code === 'Enter'){
-      this.addPkmn();
+    if (event.code === 'Enter') {
+      this.pokemonService.addPokemon(this.newPokemonName);
     }
   }
-  closeToast(){
-    this.pkmnHasBeenAdded = false;
-    this.pkmnAlreadyExist = false;
+
+  closeToastAfterSomeTime() {
+    setTimeout(() => {
+      this.onToastClose();
+    }, 2000);
   }
 
-  pkmnAlreadyExiste(){
-    let pkmnAlreadyExist = false;
-    this.pokemons.forEach(pokemon => {
-      if (this.newPkmnName === pokemon.name){
-        pkmnAlreadyExist = true;
-      }
-    })
-    return pkmnAlreadyExist;
- }
+  onToastClose() {
+    this.addedPokemon = '';
+    this.duplicatePokemon = '';
+  }
 
+  onPokemonItemDelete(indexToDelete: number) {
+    this.pokemonService.deletePokemon(indexToDelete);
+  }
 }
