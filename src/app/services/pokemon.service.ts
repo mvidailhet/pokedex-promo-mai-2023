@@ -13,8 +13,8 @@ export class PokemonService {
   pokemons: Pokemon[] = [];
 
   constructor(private apiService: ApiService) {
-    //this.loadPokemonsFromAPI();
-    this.loadPokemonsResultFromAPI();
+    this.loadPokemonsFromAPI();
+    //this.loadPokemonsResultFromAPI();
   }
 
   loadPokemonsResultFromAPI() {

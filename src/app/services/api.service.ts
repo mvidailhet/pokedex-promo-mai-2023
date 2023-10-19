@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pokemon } from '../models/pokemon';
-import { map } from 'rxjs';
+import { delay, map } from 'rxjs';
 
 interface PostResult {
   name: string;
@@ -35,6 +35,7 @@ export class ApiService {
   getPokemons() {
     return this.httpClient.get<GetResult>(`${this.apiUrl}/pokemons.json`)
     .pipe(
+      delay(3000),
       map((getResult: GetResult) => {
         const ids = Object.keys(getResult);
         const pokemons: Pokemon[] = ids.map((id: string) => {
