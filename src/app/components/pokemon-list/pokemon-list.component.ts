@@ -10,6 +10,10 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class PokemonListComponent {
   newPokemonName = '';
 
+  newPokemonType = '';
+
+  pokemonTypes = pokemonTypes;
+
   addedPokemon = '';
   duplicatePokemon = '';
 

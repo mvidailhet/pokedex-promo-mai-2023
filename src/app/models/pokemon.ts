@@ -8,8 +8,10 @@ export interface LocalPokemon {
   gender: Gender;
   type: PkmnType;
   level: number;
+  types: Type[];
 }
 
 export interface Pokemon extends LocalPokemon {
   id: string;
 }
+

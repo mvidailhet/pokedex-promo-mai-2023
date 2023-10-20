@@ -65,11 +65,21 @@ export class PokemonService {
       return null;
     }
 
+    const newPokemonTypes = pokemonTypeNames.map((pokemonTypeName: string) => {
+      const type = pokemonTypes.find((type) => {
+        return type.name === pokemonTypeName;
+      });
+      return type;
+    }).filter((type: Type | undefined) => {
+      return type !== undefined
+    }) as Type[];
+
     const newPokemon: LocalPokemon = {
       name: newPokemonName,
       gender: this.getRandomGender(),
       type: newPkmnType,
       level: Utils.getRandomNumber(1, 5),
+      types: newPokemonTypes,
     };
 
     this.apiService.postPokemon(newPokemon)

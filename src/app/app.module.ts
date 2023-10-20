@@ -7,26 +7,37 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
-import { MonPokemon } from './components/mon-pokemon/mon-pokemon.component';
-import { Route } from '@angular/router';
+import { MyPokemonComponent } from './components/my-pokemon/my-pokemon.component';
+import { Route, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
 
+const routes: Route[] = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'pokemon',
+    component: PokemonComponent
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonItemComponent,
     PokemonListComponent,
-    MonPokemon,
-    HomeComponent
+    MyPokemonComponent,
+    HomeComponent,
+    PokemonComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     NgbModule,
-
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
