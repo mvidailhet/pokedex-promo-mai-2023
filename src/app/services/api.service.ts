@@ -39,8 +39,8 @@ export class ApiService {
   getPokemons() {
     return this.httpClient.get<GetResult>(`${this.apiUrl}/pokemons.json`)
     .pipe(
-      delay(3000),
-      map((getResult: GetResult) => {
+      map((getResult: GetResult | null) => {
+        if (getResult === null) return [];
         const ids = Object.keys(getResult);
         const pokemons: Pokemon[] = ids.map((id: string) => {
           const currentPokemon: LocalPokemon = getResult[id];

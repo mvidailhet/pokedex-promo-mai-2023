@@ -76,6 +76,7 @@ export interface LocalPokemon {
   name: string;
   gender: Gender;
   level: number;
+  types: Type[];
 }
 
 export interface Pokemon extends LocalPokemon {

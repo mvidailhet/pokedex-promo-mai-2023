@@ -3,9 +3,20 @@
   *ngIf="pokemon"
 >
   <div class="col">
-    <span class="pokemon-name">{{ pokemon.name }}</span> -
-    {{ pokemon.level }} -
-    <span class="pokemon-gender">{{ pokemon.gender }}</span>
+    <div>
+      <span class="pokemon-name">{{ pokemon.name }}</span> -
+      {{ pokemon.level }} -
+      <span class="pokemon-gender">{{ pokemon.gender }}</span>
+    </div>
+    <div class="mt-2">
+      <span
+        *ngFor="let type of pokemon.types"
+        style="background-color: {{ type.color }}"
+        class="badge mx-2 pokemon-type"
+      >
+        {{ type.name }}
+      </span>
+    </div>
   </div>
   <div class="col btn-delete-col">
     <button (click)="onDeleteBtnClick()" class="btn btn-primary">
