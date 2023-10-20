@@ -11,6 +11,18 @@
     </span>
   </div>
 
-  <a [routerLink]="['/']">Retour à l'accueuil</a>
+  <a class="my-5 d-block" [routerLink]="['/']">Retour à l'accueuil</a>
+
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="['./']" aria-current="page">Général</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['./statistiques']">Statistiques</a>
+    </li>
+  </ul>
+
+  <router-outlet></router-outlet>
 </div>
 

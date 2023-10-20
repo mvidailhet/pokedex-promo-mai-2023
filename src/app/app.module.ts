@@ -11,6 +11,8 @@ import { MyPokemonComponent } from './components/my-pokemon/my-pokemon.component
 import { Route, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
+import { GeneralComponent } from './pages/pokemon/pages/general/general.component';
+import { StatistiquesComponent } from './pages/pokemon/pages/statistiques/statistiques.component';
 
 const routes: Route[] = [
   {
@@ -19,7 +21,17 @@ const routes: Route[] = [
   },
   {
     path: 'pokemon/:name',
-    component: PokemonComponent
+    component: PokemonComponent,
+    children: [
+      {
+        path: '',
+        component: GeneralComponent
+      },
+      {
+        path: 'statistiques',
+        component: StatistiquesComponent
+      }
+    ]
   }
 ];
 
@@ -30,7 +42,9 @@ const routes: Route[] = [
     PokemonListComponent,
     MyPokemonComponent,
     HomeComponent,
-    PokemonComponent
+    PokemonComponent,
+    GeneralComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule,
