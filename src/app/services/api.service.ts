@@ -16,8 +16,7 @@ export interface GetResult {
 })
 export class ApiService {
   private apiUrl =
-    'https://pokedex-promo-mai-2023-default-rtdb.europe-west1.firebasedatabase.app';
-
+    'https://mon-pokedex-d203a-default-rtdb.europe-west1.firebasedatabase.app';
   constructor(private httpClient: HttpClient) {}
 
   postPokemon(pokemon: LocalPokemon) {
@@ -33,7 +32,8 @@ export class ApiService {
     return this.httpClient.get<GetResult>(`${this.apiUrl}/pokemons.json`)
     .pipe(
       delay(3000),
-      map((getResult: GetResult) => {
+      map((getResult: GetResult | null) => {
+        if (!getResult) return [];
         const ids = Object.keys(getResult);
         const pokemons: Pokemon[] = ids.map((id: string) => {
           const currentPokemon: LocalPokemon = getResult[id];
