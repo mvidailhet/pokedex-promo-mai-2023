@@ -24,6 +24,7 @@
 </div>
 
 <app-pokemon-item
+  [routerLink]="['pokemon']"
   *ngFor="let pokemon of pokemonService.pokemons; let pokemonIndex = index"
   [pokemon]="pokemon"
   (delete)="onPokemonItemDelete(pokemonIndex)"
