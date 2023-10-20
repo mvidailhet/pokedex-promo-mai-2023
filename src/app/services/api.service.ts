@@ -31,7 +31,6 @@ export class ApiService {
   getPokemons() {
     return this.httpClient.get<GetResult>(`${this.apiUrl}/pokemons.json`)
     .pipe(
-      delay(3000),
       map((getResult: GetResult | null) => {
         if (!getResult) return [];
         const ids = Object.keys(getResult);

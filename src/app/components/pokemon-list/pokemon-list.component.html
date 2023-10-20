@@ -7,8 +7,8 @@
       type="text"
     />
   </div>
-  <div class="col-2 d-flex align-items-center">
-    <select [(ngModel)]="selectedType" ng-options="">
+  <div class="col-3">
+    <select [(ngModel)]="selectedType" class="form-select">
       <option
       *ngFor="let type of pokemonService.pkmnType;"
       [ngValue]="type">{{ type }} </option>
