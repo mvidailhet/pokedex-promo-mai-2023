@@ -5,7 +5,9 @@
   <div class="col">
     <span class="pokemon-name">{{ pokemon.name }}</span> -
     {{ pokemon.level }} -
-    <span class="pokemon-gender">{{ pokemon.gender }}</span>
+    <span class="pokemon-gender">{{ pokemon.gender }} - </span>
+    <span class="pokemon-type-{{ pokemon.type }} badge rounded-pill">{{ pokemon.type }}</span>
+
   </div>
   <div class="col btn-delete-col">
     <button (click)="onDeleteBtnClick()" class="btn btn-primary">

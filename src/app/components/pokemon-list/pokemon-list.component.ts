@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PkmnType } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
@@ -12,13 +13,15 @@ export class PokemonListComponent {
   addedPokemon = '';
   duplicatePokemon = '';
 
+  selectedType: PkmnType = 'Eau';
+
   constructor(
     public pokemonService: PokemonService,
   ) {
   }
 
   addPokemon() {
-    const addedPokemon = this.pokemonService.addPokemon(this.newPokemonName);
+    const addedPokemon = this.pokemonService.addPokemon(this.newPokemonName, this.selectedType );
     if (addedPokemon) {
       this.addedPokemon = this.newPokemonName;
     } else {
@@ -30,7 +33,7 @@ export class PokemonListComponent {
 
   onInputKeyPress(event: KeyboardEvent) {
     if (event.code === 'Enter') {
-      this.pokemonService.addPokemon(this.newPokemonName);
+      this.pokemonService.addPokemon(this.newPokemonName, this.selectedType);
     }
   }
 

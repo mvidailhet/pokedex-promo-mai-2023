@@ -7,8 +7,17 @@
       type="text"
     />
   </div>
+  <div class="col-2 d-flex align-items-center">
+    <select [(ngModel)]="selectedType" ng-options="">
+      <option
+      *ngFor="let type of pokemonService.pkmnType;"
+      [ngValue]="type">{{ type }} </option>
+    </select>
+  </div>
   <div class="col-3">
-    <button (click)="addPokemon()" class="btn btn-primary">Ajouter</button>
+    <button
+      (click)="addPokemon()"
+      class="btn btn-primary">Ajouter</button>
   </div>
 </div>
 
@@ -19,6 +28,7 @@
 </div>
 
 <app-pokemon-item
+
   *ngFor="let pokemon of pokemonService.pokemons; let pokemonIndex = index"
   [pokemon]="pokemon"
   (delete)="onPokemonItemDelete(pokemonIndex)"
