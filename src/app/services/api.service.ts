@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LocalPokemon, Pokemon } from '../models/pokemon';
+import { LocalPokemon, Pokemon, Type, pokemonTypes } from '../models/pokemon';
 import { delay, map } from 'rxjs';
 
 export interface PostResult {
@@ -18,11 +18,18 @@ export class ApiService {
   private apiUrl =
     'https://pokedex-promo-mai-2023-default-rtdb.europe-west1.firebasedatabase.app';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+
+  }
 
   postPokemon(pokemon: LocalPokemon) {
     return this.httpClient
       .post<PostResult>(`${this.apiUrl}/pokemons.json`, pokemon);
+  }
+
+  postType(type: Type) {
+    return this.httpClient
+      .post<PostResult>(`${this.apiUrl}/types.json`, type);
   }
 
   getPokemonsResult() {
