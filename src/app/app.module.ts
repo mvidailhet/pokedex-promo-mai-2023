@@ -8,19 +8,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 import { MonPokemon } from './components/mon-pokemon/mon-pokemon.component';
+import { Route } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { PokemonComponent } from './pages/pokemon/pokemon.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonItemComponent,
     PokemonListComponent,
-    MonPokemon
+    MonPokemon,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
