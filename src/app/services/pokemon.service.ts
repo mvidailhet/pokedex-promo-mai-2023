@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Gender, LocalPokemon, Pokemon, pokemonTypes } from '../models/pokemon';
+import { Gender, LocalPokemon, Pokemon, Type, pokemonTypes } from '../models/pokemon';
 import { Utils } from '../utils';
 import { ApiService, GetResult, PostResult } from './api.service';
 import { map } from 'rxjs';
@@ -55,19 +55,25 @@ export class PokemonService {
     return pokemonTypes[randomNumberType];
   }
 
-  addPokemon(newPokemonName: string) {
+  addPokemon(newPokemonName: string, pokemonTypeNames: string[]) {
     if (this.pokemonAlreadyExists(newPokemonName)) {
       return null;
     }
+
+    const newPokemonTypes = pokemonTypeNames.map((pokemonTypeName: string) => {
+      const type = pokemonTypes.find((type) => {
+        return type.name === pokemonTypeName;
+      });
+      return type;
+    }).filter((type: Type | undefined) => {
+      return type !== undefined
+    }) as Type[];
 
     const newPokemon: LocalPokemon = {
       name: newPokemonName,
       gender: this.getRandomGender(),
       level: Utils.getRandomNumber(1, 5),
-      types: [
-        this.getRandomType(),
-        this.getRandomType(),
-      ],
+      types: newPokemonTypes,
     };
 
     this.apiService.postPokemon(newPokemon)

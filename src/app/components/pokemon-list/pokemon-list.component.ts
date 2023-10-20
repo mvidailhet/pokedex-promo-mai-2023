@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { pokemonTypes } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
@@ -9,6 +10,10 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class PokemonListComponent {
   newPokemonName = '';
 
+  newPokemonType = '';
+
+  pokemonTypes = pokemonTypes;
+
   addedPokemon = '';
   duplicatePokemon = '';
 
@@ -18,7 +23,7 @@ export class PokemonListComponent {
   }
 
   addPokemon() {
-    const addedPokemon = this.pokemonService.addPokemon(this.newPokemonName);
+    const addedPokemon = this.pokemonService.addPokemon(this.newPokemonName, [this.newPokemonType]);
     if (addedPokemon) {
       this.addedPokemon = this.newPokemonName;
     } else {
@@ -30,7 +35,7 @@ export class PokemonListComponent {
 
   onInputKeyPress(event: KeyboardEvent) {
     if (event.code === 'Enter') {
-      this.pokemonService.addPokemon(this.newPokemonName);
+      this.pokemonService.addPokemon(this.newPokemonName, [this.newPokemonType]);
     }
   }
 

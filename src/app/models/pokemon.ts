@@ -5,7 +5,7 @@ export type Type = {
   color: string;
 }
 
-export const pokemonTypes = [
+export const pokemonTypes: Type[] = [
   {
     name: 'normal',
     color: '#A0A2A0',
